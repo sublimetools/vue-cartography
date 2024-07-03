@@ -1,13 +1,19 @@
 <script setup lang="ts">
+import Geographies from './components/Geographies.vue'
 import Geography from './components/Geography.vue'
-//import Geography from 'vuemaps'
 </script>
 
 <template>
-  <Geography 
-    geography="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson" 
+  <Geographies
+    geography="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
     width="800"
     height="600"
-    stroke="gray"
-  />
+    v-slot="{geographies}"
+  >
+    <Geography 
+      v-for="geography in geographies"
+      :geography="geography" 
+      fill="white"
+      stroke="black" />
+  </Geographies>
 </template>
