@@ -10,13 +10,33 @@
 import { onMounted, ref } from 'vue';
 import * as d3 from 'd3';
 
+const projections = {
+  'geoAzimuthalEqualArea': d3.geoAzimuthalEqualArea,
+  'geoAzimuthalEquidistant': d3.geoAzimuthalEquidistant,
+  'geoGnomonic': d3.geoGnomonic,
+  'geoOrthographic': d3.geoOrthographic,
+  'geoStereographic': d3.geoStereographic,
+  'geoConicConformal': d3.geoConicConformal,
+  'geoConicEqualArea': d3.geoConicEqualArea,
+  'geoConicEquidistant': d3.geoConicEquidistant,
+  'geoAlbers': d3.geoAlbers,
+  'geoAlbersUsa': d3.geoAlbersUsa,
+  'geoEquirectangular': d3.geoEquirectangular,
+  'geoMercator': d3.geoMercator,
+  'geoTransverseMercator': d3.geoTransverseMercator,
+  'geoEqualEarth': d3.geoEqualEarth,
+  'geoNaturalEarth1': d3.geoNaturalEarth1
+}
+
+type ProjectionName = keyof typeof projections;
+
 const props = defineProps({
   geography: { // topojson file
     type: String,
     required: true
   },
   projection: {
-    type: String,
+    type: String as () => ProjectionName,
     default: 'geoNaturalEarth1'
   },
   width: {
@@ -37,24 +57,6 @@ const props = defineProps({
 });
 
 const geographies = ref([]);
-
-const projections = {
-  'geoAzimuthalEqualArea': d3.geoAzimuthalEqualArea,
-  'geoAzimuthalEquidistant': d3.geoAzimuthalEquidistant,
-  'geoGnomonic': d3.geoGnomonic,
-  'geoOrthographic': d3.geoOrthographic,
-  'geoStereographic': d3.geoStereographic,
-  'geoConicConformal': d3.geoConicConformal,
-  'geoConicEqualArea': d3.geoConicEqualArea,
-  'geoConicEquidistant': d3.geoConicEquidistant,
-  'geoAlbers': d3.geoAlbers,
-  'geoAlbersUsa': d3.geoAlbersUsa,
-  'geoEquirectangular': d3.geoEquirectangular,
-  'geoMercator': d3.geoMercator,
-  'geoTransverseMercator': d3.geoTransverseMercator,
-  'geoEqualEarth': d3.geoEqualEarth,
-  'geoNaturalEarth1': d3.geoNaturalEarth1
-}
 
 const loadMap = () => {
   const svg = d3.select('svg'),

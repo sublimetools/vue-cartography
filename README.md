@@ -11,18 +11,20 @@ Create d3.js maps easily in Vue with `VueCartography`.
 Example of use:
 
 ```vue
-<Geographies
-  geography="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
-  width="800"
-  height="600"
-  v-slot="{geographies}"
->
-  <Geography 
-    v-for="geography in geographies"
-    :geography="geography" 
-    fill="white"
-    stroke="black" />
-</Geographies>
+<template>
+  <Geographies
+    geography="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+    width="800"
+    height="600"
+    v-slot="{geographies}"
+  >
+    <Geography 
+      v-for="geography in geographies"
+      :geography="geography" 
+      fill="white"
+      stroke="black" />
+  </Geographies>
+</template>
 ```
 
 ## Components and their params

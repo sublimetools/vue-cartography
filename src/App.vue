@@ -5,7 +5,7 @@ import Geography from './components/Geography.vue'
 
 <template>
   <Geographies
-    geography="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+    geography="https://raw.githubusercontent.com/sublimetools/vue-cartography/main/src/assets/world.geojson"
     width="800"
     height="600"
     v-slot="{geographies}"
