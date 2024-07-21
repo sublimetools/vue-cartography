@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import * as d3 from 'd3';
 
 const projections = {
@@ -29,6 +29,7 @@ const projections = {
 }
 
 type ProjectionName = keyof typeof projections;
+type NumberPair = [number, number];
 
 const props = defineProps({
   geography: { // topojson file
@@ -47,6 +48,10 @@ const props = defineProps({
     type: [String, Number],
     required: true
   },
+  center: {
+    type: String,
+    default: [13, 50]
+  },
   scale: {
     type: [String, Number],
     default: 1.5
@@ -54,6 +59,19 @@ const props = defineProps({
   filter: {
     type: String
   }
+});
+
+const parsedCenter = computed(() => {
+  // Remove brackets and split by comma
+  const cleanedString = props.center.replace(/[\[\]\s]/g, '');
+  const posArray = cleanedString.split(',').map(Number);
+  
+  // Ensure it has exactly two elements and both are numbers
+  if (posArray.length !== 2 || posArray.some(isNaN)) {
+    throw new Error('Invalid position format');
+  }
+
+  return posArray as [number, number];
 });
 
 const geographies = ref([]);
@@ -65,7 +83,7 @@ const loadMap = () => {
   
   // Map and projection
   const projection = projections[props.projection]()
-    .center([12, 0]) // GPS of location to zoom on
+    .center(parsedCenter.value) // GPS of location to zoom on
     .scale(width / +props.scale / Math.PI) // Zoom
     .translate([width / 2, height / 2]);
   

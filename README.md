@@ -13,9 +13,11 @@ Example of use:
 ```vue
 <template>
   <Geographies
-    geography="https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
+    geography="https://raw.githubusercontent.com/sublimetools/vue-cartography/main/src/assets/world.geojson"
     width="800"
     height="600"
+    center="[12, 0]"
+    scale="1.5"
     v-slot="{geographies}"
   >
     <Geography 
@@ -25,6 +27,10 @@ Example of use:
       stroke="black" />
   </Geographies>
 </template>
+
+<script setup>
+import { Geographies, Geography } from 'vue-cartography'
+</script>
 ```
 
 ## Components and their params
@@ -55,6 +61,8 @@ Example of use:
 `height`: SVG height
 
 `scale`: Map zoom. Zoom in with lower values and zoom out with higher values
+
+`center`: Centers map on given coordinates of the form [longitude, latitude]
 
 `filter`: Check if properties.name matches the filter [Experimental]
 

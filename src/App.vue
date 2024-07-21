@@ -8,6 +8,8 @@ import Geography from './components/Geography.vue'
     geography="https://raw.githubusercontent.com/sublimetools/vue-cartography/main/src/assets/world.geojson"
     width="800"
     height="600"
+    scale="1.5"
+    center="[12, 0]"
     v-slot="{geographies}"
   >
     <Geography 
